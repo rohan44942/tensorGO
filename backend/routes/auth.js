@@ -17,10 +17,25 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   (req, res) => {
+    // Generate JWT token containing user data
     const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.redirect(`http://localhost:5173?token=${token}`); // Redirect to frontend with JWT token
+    console.log("from router", req.user.email);
+    // Send the user details along with the JWT token to the frontend
+    const userDetails = {
+      token,
+      userId: req.user.id, // Assuming req.user.id is the user ID in your system
+      email: req.user._json.email, // Access the email correctly
+      name:
+        req.user._json.name ||
+        `${req.user._json.given_name} ${req.user._json.family_name}`, // Access full name from first and last names
+    };
+
+    // Redirect to the frontend with the query params (JWT token and user details)
+    res.redirect(
+      `http://localhost:5173?token=${userDetails.token}&userId=${userDetails.userId}&email=${userDetails.email}&name=${userDetails.name}`
+    );
   }
 );
 

@@ -1,19 +1,25 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
+
 const authRoutes = require("./routes/auth"); // auth route
 const feedbackRoutes = require("./routes/feedback"); // feedback route
-const app = express();
 
 dotenv.config();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 // Authentication routes
 app.use("/api/auth", authRoutes);
-app.use("/api/feedback", feedbackRoutes);
+// for data submition and retreival from intercom
+
+app.use("/api/customer-service", feedbackRoutes);
+
 // app.post("/api/feedback/submit", (req, res) => {
 //   return res.status(200).json({ message: "ok" });
 // });

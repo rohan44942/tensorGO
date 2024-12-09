@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: '/api', // Proxy to backend
+  baseURL: "http://localhost:5000", // Proxy to backend
 });
 
 export default api;
