@@ -32,11 +32,40 @@ router.get(
         `${req.user._json.given_name} ${req.user._json.family_name}`, // Access full name from first and last names
     };
 
-    // Redirect to the frontend with the query params (JWT token and user details)
     res.redirect(
       `http://localhost:5173?token=${userDetails.token}&userId=${userDetails.userId}&email=${userDetails.email}&name=${userDetails.name}`
     );
   }
 );
+
+router.get("/logout", (req, res) => {
+  // Clear any user-related session (if used)
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).send("Error logging out.");
+      }
+    });
+  }
+
+  // Redirect the user to the Google logout page
+  const GOOGLE_LOGOUT_URL = "https://accounts.google.com/logout";
+
+  // Redirect the user back to the frontend after logging out of Google
+  res.send(`
+    <html>
+      <body>
+        <script>
+          // Perform Google logout
+          window.open("${GOOGLE_LOGOUT_URL}", "_blank");
+          
+          // Redirect back to your frontend
+          window.location.href = "http://localhost:5173";
+        </script>
+      </body>
+    </html>
+  `);
+});
 
 module.exports = router;

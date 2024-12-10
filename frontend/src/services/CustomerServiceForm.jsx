@@ -7,7 +7,6 @@ const CustomerServiceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Retrieve user information from localStorage
       const userId = localStorage.getItem("userId"); 
       const email = localStorage.getItem("email");
       const name = localStorage.getItem("name");

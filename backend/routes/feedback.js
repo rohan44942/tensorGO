@@ -3,6 +3,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 const router = express.Router();
+// const authenticate = require("../middleware/auth");
 
 // Intercom API Configuration
 const INTERCOM_API_URL = "https://api.intercom.io";
