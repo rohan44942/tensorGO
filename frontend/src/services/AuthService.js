@@ -3,6 +3,9 @@ export const loginWithGoogle = () => {
 };
 export const logoutFromGoogle = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("email");
+  localStorage.removeItem("name");
+  localStorage.removeItem("userId");
 
   // Redirect to Google logout endpoint
   // const GOOGLE_LOGOUT_URL =

@@ -39,7 +39,8 @@ router.get(
 );
 
 router.get("/logout", (req, res) => {
-  // Clear any user-related session (if used)
+  // localStorage.removeItem("token");
+
   if (req.session) {
     req.session.destroy((err) => {
       if (err) {

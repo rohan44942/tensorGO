@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
-  }
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
 
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
   }
-  
+}
